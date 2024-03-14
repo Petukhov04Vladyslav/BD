@@ -20,7 +20,7 @@ USE lab;
   CREATE TABLE table_1 (
   № int(3) NOT NULL,
   Code int(4) NOT NULL,
-  New varchar(3) NOT NULL,
+  New tinyint(1) NOT NULL,
   Name text NOT NULL,
   Price float DEFAULT NULL,
   Publisher varchar(50) NOT NULL,
