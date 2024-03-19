@@ -40,7 +40,7 @@ SELECT * FROM table_1 WHERE Code IN (5110, 5141, 4985, 4241);
 SELECT * FROM table_1 WHERE EXTRACT (YEAR FROM date) IN (1999, 2001, 2003, 2005);
 
 14. Вивести книги назви яких починаються на літери А-К
-SELECT * FROM table_1 WHERE Name REGEXP '^[А-К]';
+SELECT * FROM table_1 WHERE name ILIKE 'А%' OR name ILIKE 'Б%' OR name ILIKE 'В%' OR name ILIKE 'Г%' OR name ILIKE 'Д%' OR name ILIKE 'Е%' name ILIKE 'Є%' OR OR name ILIKE 'Ж%' OR name ILIKE 'З%' OR name ILIKE 'И%' OR name ILIKE 'І%' OR name ILIKE 'Ї%' OR name ILIKE 'Й%' OR name ILIKE 'К%';
 
 15. Вивести книги назви яких починаються на літери "АПП", видані в 2000 році з ціною до 20
 SELECT * FROM table_1 WHERE Name LIKE 'АПП%' AND EXTRACT (YEAR FROM DATE) = 2000 AND Price < 20;
