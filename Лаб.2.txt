@@ -11,10 +11,7 @@ SELECT Code, Name, New, Pages, Price, № FROM table_1;
 SELECT * FROM table_1 LIMIT 10;
 
 5. Вивести значення всіх колонок 10% перших рядків
-SET @total_rows = (SELECT COUNT(*) FROM table_1);
-PREPARE stmt FROM 'SELECT * FROM table_1 LIMIT ?';
-EXECUTE stmt USING ROUND(@total_rows * 0.10);
-DEALLOCATE PREPARE stmt;
+SELECT * FROM table_1 LIMIT (SELECT CEIL(COUNT(*) * 0.10) FROM table_1);
 
 6. Вивести значення колонки код без повторення однакових кодів
 SELECT DISTINCT Code FROM table_1;
