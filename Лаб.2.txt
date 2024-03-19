@@ -17,13 +17,13 @@ SELECT * FROM table_1 LIMIT (SELECT CEIL(COUNT(*) * 0.10) FROM table_1);
 SELECT DISTINCT Code FROM table_1;
 
 7. Вивести всі книги новинки
-SELECT * FROM table_1 WHERE New = 'Yes';
+SELECT * FROM table_1 WHERE New = true;
 
 8. Вивести всі книги новинки з ціною від 20 до 30
-SELECT * FROM table_1 WHERE New = 'Yes' AND Price BETWEEN 20 AND 30;
+SELECT * FROM table_1 WHERE New = true AND Price BETWEEN 20 AND 30;
 
 9. Вивести всі книги новинки з ціною менше 20 і більше 30
-SELECT * FROM table_1 WHERE New = 'Yes' AND (Price < 20 OR Price > 30);
+SELECT * FROM table_1 WHERE New = true AND (Price < 20 OR Price > 30);
 
 10. Вивести всі книги з кількістю сторінок від 300 до 400 і з ціною більше 20 і менше 30
 SELECT * FROM table_1 WHERE Pages BETWEEN 300 AND 400 AND Price BETWEEN 20 AND 30;
