@@ -1,0 +1,69 @@
+1. Вивести книги у яких не введена ціна або ціна дорівнює 0
+SELECT * FROM table_1 WHERE price IS NULL OR price = 0;
+
+2. Вивести книги у яких введена ціна, але не введений тираж
+SELECT * FROM table_1 WHERE price IS NOT NULL AND circulation IS NULL;
+
+3. Вивести книги, про дату видання яких нічого не відомо.
+SELECT * FROM table_1 WHERE date IS NULL;
+
+4. Вивести книги, з дня видання яких пройшло не більше року.
+SELECT * FROM table_1 WHERE date >= CURRENT_DATE - INTERVAL '1 year';
+
+5. Вивести список книг-новинок, відсортованих за зростанням ціни
+SELECT * FROM table_1 WHERE new = 'true' ORDER BY price ASC;
+
+6. Вивести список книг з числом сторінок від 300 до 400, відсортованих в зворотному алфавітному порядку назви
+SELECT * FROM table_1 WHERE pages BETWEEN 300 and 400 ORDER BY name DESC
+
+7. Вивести список книг з ціною від 20 до 40, відсортованих за спаданням дати
+SELECT * FROM table_1 WHERE price BETWEEN 20 and 40 ORDER BY date DESC
+
+8. Вивести список книг, відсортованих в алфавітному порядку назв і ціною по спадаючій
+SELECT * FROM table_1 ORDER BY name ASC, price DESC;
+
+9. Вивести книги, у яких ціна однієї сторінки < 10 копійок.
+SELECT * FROM table_1 WHERE (price / pages) < 0.1
+
+10. Вивести значення наступних колонок: число символів в назві, перші 20 символів назви великими літерами
+SELECT LENGTH(name) AS name_length,
+CONCAT(UPPER(SUBSTRING(name FROM 1 FOR 20)),
+SUBSTRING(name FROM 21)) AS name FROM table_1;
+
+11. Вивести значення наступних колонок: перші 10 і останні 10 символів назви прописними буквами, розділені '...'
+SELECT UPPER(SUBSTRING(name FROM 1 FOR 10)) || '...' || 
+UPPER(SUBSTRING(name FROM LENGTH(name) - 9 FOR 10)) AS first_last_10_upper FROM table_1;
+
+12. Вивести значення наступних колонок: назва, дата, день, місяць, рік
+SELECT name, date, EXTRACT(DAY FROM date) AS day, 
+EXTRACT(MONTH FROM date) AS month, 
+EXTRACT(YEAR FROM date) AS year FROM table_1;
+
+13. Вивести значення наступних колонок: назва, дата, дата в форматі 'dd / mm / yyyy'
+SELECT name, date, TO_CHAR(date, 'DD/MM/YYYY') AS formatted_date FROM table_1;
+
+14. Вивести значення наступних колонок: код, ціна, ціна в грн., ціна в євро, ціна в руб.
+SELECT code, price, CAST(price * 39.16 AS DECIMAL(10, 2)) AS price_uah,
+CAST(price * 0.92 AS DECIMAL(10, 2)) AS price_euro,
+CAST(price * 91.45 AS DECIMAL(10, 2)) AS price_rub FROM table_1
+
+15. Вивести значення наступних колонок: код, ціна, ціна в грн. без копійок, ціна без копійок округлена
+SELECT code, price, CAST(price * 39.16 AS INTEGER) AS price_uah,
+CAST(price AS INTEGER) FROM table_1
+
+16. Додати інформацію про нову книгу (всі колонки)
+INSERT INTO table_1 (№, code, new, name, price, publisher, pages, format, date, circulation, topic, category) 
+VALUES (123456, 12345, true, 'Нова книга', 10.99, 'Нове видавництво', 500, '70х100/16', '2024-03-19', 5000, 'Використання ПК в цілому', 'Підручники');
+
+17. Додати інформацію про нову книгу (колонки обов'язкові для введення)
+INSERT INTO table_1 (№, code, new, name, publisher, pages, circulation, topic, category)
+VALUES (123456, 12345, true, 'Нова книга', 'Нове видавництво', 500, 5000, 'Використання ПК в цілому', 'Підручники');
+
+18. Видалити книги, видані до 1990 року
+DELETE FROM table_1 WHERE date < '1990-01-01';
+
+19. Проставити поточну дату для тих книг, у яких дата видання відсутня
+UPDATE table_1 SET date = CURRENT_DATE WHERE date IS NULL;
+
+20. Установити ознаку новинка для книг виданих після 2005 року
+UPDATE table_1 SET new = true WHERE date > '2005-01-01';
