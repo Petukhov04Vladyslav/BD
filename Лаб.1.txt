@@ -2,7 +2,7 @@
 
     Головний ключ : Номер
     Обов'язкові поля для введення: Номер, Код, Новинка, Назва, Видавництво, Сторінки, Тираж, Тема, Категорія
-    Значення за замовчуванням: Формат (000х000/00), Ціна (NULL), Дата (NULL).
+    Значення за замовчуванням: Ціна (NULL), Дата (NULL).
     Область допустимих значень: Може визначатися для числових полів (Номер, Код, Тираж, Сторінки) та для перелічуваних типів (Новинка, Категорія, Видавництво, Тема).
 
 2. a. Видалення попередньої версії бази даних
@@ -22,9 +22,9 @@ USE lab;
   New BOOLEAN NOT NULL,
   Name VARCHAR(100) NOT NULL,
   Price DECIMAL(10, 2) DEFAULT NULL,
-  Publisher VARCHAR NOT NULL,
+  Publisher VARCHAR(35) NOT NULL,
   Pages INT NOT NULL,
-  Format VARCHAR(15) NOT NULL DEFAULT '000x000/00',
+  Format VARCHAR(15) NOT NULL,
   Date DATE DEFAULT NULL,
   Circulation INT NOT NULL,
   Topic VARCHAR(30) NOT NULL,
@@ -79,6 +79,7 @@ DROP COLUMN Author;
 ALTER TABLE table_1
 DROP INDEX idx_Publisher,
 ADD UNIQUE INDEX idx_Publisher UNIQUE (Publisher DESC);
+//забезпечує унікальність даних у вказаному стовпці або групі стовпців
 
 -- e. Видалення індексу
 DROP INDEX idx_Publisher ON table_1;
