@@ -48,7 +48,7 @@ CAST(price * 0.92 AS DECIMAL(10, 2)) AS price_euro,
 CAST(price * 91.45 AS DECIMAL(10, 2)) AS price_rub FROM table_1
 
 15. Вивести значення наступних колонок: код, ціна, ціна в грн. без копійок, ціна без копійок округлена
-SELECT code, price, CAST(price * 39.16 AS INTEGER) AS price_uah,
+SELECT code, price, TRUNC (price * 39.16, 0) AS price_uah,
 CAST(price AS INTEGER) FROM table_1
 
 16. Додати інформацію про нову книгу (всі колонки)
